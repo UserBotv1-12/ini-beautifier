@@ -1,0 +1,19 @@
+{
+  "name": "txt-beautifier",
+  "version": "1.0.0",
+  "description": "a text file beautifier.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dajbd/txt-beautifier.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dajbd/txt-beautifier/issues"
+  },
+  "homepage": "https://github.com/dajbd/txt-beautifier#readme"
+}
