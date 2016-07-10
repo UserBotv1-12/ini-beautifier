@@ -4,6 +4,7 @@
   "description": "a text file beautifier.",
   "main": "index.js",
   "scripts": {
+    "start": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/dajbd/txt-beautifier/issues"
   },
-  "homepage": "https://github.com/dajbd/txt-beautifier#readme"
+  "homepage": "https://github.com/dajbd/txt-beautifier#readme",
+  "dependencies": {
+    "fs-promise": "^0.5.0",
+    "jschardet": "^1.4.1"
+  }
 }
