@@ -118,10 +118,12 @@ var txtBeautifier = {
         }
         // console.log(realPath)
 
-        fsp.writeFile(realPath + filename, content, encodingForResult).then(function(data) {
-            console.log('Complete, ', filename)
-        }).catch(function(e) {
-            console.log(e)
+        fsp.mkdir(realPath).then(() => {
+            fsp.writeFile(realPath + filename, content, encodingForResult).then((data) => {
+                console.log('Complete, ', filename)
+            }).catch(function(e) {
+                console.log(e)
+            })
         })
     }
 }
