@@ -65,7 +65,7 @@ var txtBeautifier = {
             var before = string[offset - 1]
 
             // 前面是“目录” 允许换行
-            if (before === '录') {
+            if (string[offset - 2] + before === '目录') {
                 return '\n'
             }
 
@@ -74,19 +74,24 @@ var txtBeautifier = {
                 return '\n'
             }
 
-            // 后续的10个字符中，出现“第x章”、“第x节”，那么允许换行
-            var after = string.substring(offset + 1, offset + 11)
-            if (after.indexOf('第') > -1 && (after.indexOf('章') > -1 || after.indexOf('节') > -1)) {
-                return '\n'
-            }
-
             // 前面是句号，允许换行
             if (before === '。') {
                 return '\n'
             }
 
+            // 前面是致谢，允许换行
+            if (string[offset - 2] + before === '致谢') {
+                return '\n'
+            }
+
             // 前面是英文 .?! ，允许换行
             if (before === '.' || before === '?' || before === '!') {
+                return '\n'
+            }
+
+            // 后续的10个字符中，可能出现了“第x章”、“第x节”，那么允许换行
+            var after = string.substring(offset + 1, offset + 11)
+            if (after.indexOf('第') > -1 && (after.indexOf('章') > -1 || after.indexOf('节') > -1)) {
                 return '\n'
             }
 
@@ -101,7 +106,6 @@ var txtBeautifier = {
         return result
     },
     writeFile(filename, content) {
-        console.log(filename)
         var realPath
 
         if (path.isAbsolute(outputDir)) {
@@ -112,10 +116,10 @@ var txtBeautifier = {
         if (realPath.slice(-1) !== '/') {
             realPath += '/'
         }
-        console.log(realPath)
+        // console.log(realPath)
 
         fsp.writeFile(realPath + filename, content, encodingForResult).then(function(data) {
-
+            console.log('Complete, ', filename)
         }).catch(function(e) {
             console.log(e)
         })
