@@ -19,6 +19,7 @@
   "homepage": "https://github.com/dajbd/txt-beautifier#readme",
   "dependencies": {
     "fs-promise": "^0.5.0",
+    "iconv-lite": "^0.4.13",
     "jschardet": "^1.4.1"
   }
 }
