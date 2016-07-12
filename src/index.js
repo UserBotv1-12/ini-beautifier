@@ -1,7 +1,7 @@
 var fsp = require('fs-promise')
 var path = require('path')
 var jschardet = require('jschardet')
-var iconv = require('iconv-lite');
+var iconv = require('iconv-lite')
 
 // 设置最终输出的文件的编码
 var encodingForResult = 'utf8'
@@ -27,24 +27,27 @@ var txtBeautifier = {
         } else {
             realPath = path.normalize(__dirname + '/' + inputDir)
         }
-        console.log(realPath)
+        console.log('inputDir', realPath)
 
         fsp.readdir(realPath).then((files) => {
-            console.log(files)
-            for (var file of files) {
+            console.log('all files:', files)
 
-                fsp.readFile(realPath + file).then(function(data) {
-                    var charset = jschardet.detect(data)
-                    charset.encoding = charset.encoding.toLowerCase().replace(/\-/g, '')
-                    console.log(charset)
+            for (let file of files) {
+                new function(file, realPath) {
+                    fsp.readFile(realPath + file).then(function(data) {
 
-                    var result = txtBeautifier.beautify(data, charset.encoding)
+                        let charset = jschardet.detect(data)
+                        charset.encoding = charset.encoding.toLowerCase().replace(/\-/g, '')
 
-                    txtBeautifier.writeFile(file, result)
+                        let result = txtBeautifier.beautify(data, charset.encoding)
 
-                }).catch(function(e) {
-                    console.log(e)
-                })
+                        console.log('start write file:', file)
+                        txtBeautifier.writeFile(file, result)
+
+                    }).catch(function(e) {
+                        console.log(e)
+                    })
+                }(file, realPath)
             }
         }).catch(function(e) {
             console.log(e)
@@ -60,7 +63,6 @@ var txtBeautifier = {
     },
     replace(string) {
         var result
-            // result = string.replace(/\r\n/g, '')
         var replaceFn = function(match, offset, string) {
             var before = string[offset - 1]
 
@@ -69,7 +71,7 @@ var txtBeautifier = {
                 return '\n'
             }
 
-            // 前面是“目录” 允许换行
+            // 前面是“序” 允许换行
             if (before === '序') {
                 return '\n'
             }
@@ -113,18 +115,30 @@ var txtBeautifier = {
         } else {
             realPath = path.normalize(__dirname + '/' + outputDir)
         }
-        if (realPath.slice(-1) !== '/') {
-            realPath += '/'
-        }
-        // console.log(realPath)
 
-        fsp.mkdir(realPath).then(() => {
+        if (realPath.slice(-1) !== '/') {
+            realPath = path.normalize(realPath + '/')
+        }
+        console.log('outputDir:', realPath)
+
+        let writeFile = function() {
             fsp.writeFile(realPath + filename, content, encodingForResult).then((data) => {
                 console.log('Complete, ', filename)
             }).catch(function(e) {
                 console.log(e)
             })
+        }
+
+        fsp.exists(realPath).then(function(exists) {
+            if (exists) {
+                writeFile()
+            } else {
+                fsp.mkdir(realPath).then(() => {
+                    writeFile()
+                })
+            }
         })
+
     }
 }
 
