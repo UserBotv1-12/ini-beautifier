@@ -34,7 +34,7 @@ var txtBeautifier = {
 
             for (let file of files) {
                 new function(file, realPath) {
-                    fsp.readFile(realPath + file).then(function(data) {
+                    fsp.readFile(realPath + file).then((data) => {
 
                         let charset = jschardet.detect(data)
                         charset.encoding = charset.encoding.toLowerCase().replace(/\-/g, '')
@@ -125,7 +125,7 @@ var txtBeautifier = {
             })
         }
 
-        fsp.exists(realPath).then(function(exists) {
+        fsp.exists(realPath).then((exists) => {
             if (exists) {
                 writeFile()
             } else {
