@@ -20,7 +20,7 @@ var txtBeautifier = {
     handle() {
         inputDir = inputDir || '../input/'
         outputDir = outputDir || '../output'
-        var realPath
+        let realPath
 
         if (path.isAbsolute(inputDir)) {
             realPath = inputDir
@@ -54,7 +54,7 @@ var txtBeautifier = {
         })
     },
     beautify(string, encoding) {
-        var result
+        let result
 
         string = iconv.decode(string, encoding)
         result = this.replace(string)
@@ -62,9 +62,9 @@ var txtBeautifier = {
         return result
     },
     replace(string) {
-        var result
-        var replaceFn = function(match, offset, string) {
-            var before = string[offset - 1]
+        let result
+        let replaceFn = function(match, offset, string) {
+            let before = string[offset - 1]
 
             // 前面是“目录” 允许换行
             if (string[offset - 2] + before === '目录') {
@@ -92,7 +92,7 @@ var txtBeautifier = {
             }
 
             // 后续的10个字符中，可能出现了“第x章”、“第x节”，那么允许换行
-            var after = string.substring(offset + 1, offset + 11)
+            let after = string.substring(offset + 1, offset + 11)
             if (after.indexOf('第') > -1 && (after.indexOf('章') > -1 || after.indexOf('节') > -1)) {
                 return '\n'
             }
@@ -108,7 +108,7 @@ var txtBeautifier = {
         return result
     },
     writeFile(filename, content) {
-        var realPath
+        let realPath
 
         if (path.isAbsolute(outputDir)) {
             realPath = outputDir
