@@ -25,7 +25,7 @@ var txtBeautifier = {
         if (path.isAbsolute(inputDir)) {
             realPath = inputDir
         } else {
-            realPath = path.normalize(__dirname + '/' + inputDir)
+            realPath = path.join(__dirname, inputDir, '/')
         }
         console.log('inputDir', realPath)
 
@@ -113,11 +113,7 @@ var txtBeautifier = {
         if (path.isAbsolute(outputDir)) {
             realPath = outputDir
         } else {
-            realPath = path.normalize(__dirname + '/' + outputDir)
-        }
-
-        if (realPath.slice(-1) !== '/') {
-            realPath = path.normalize(realPath + '/')
+            realPath = path.join(__dirname, outputDir, '/')
         }
         console.log('outputDir:', realPath)
 
