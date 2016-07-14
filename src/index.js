@@ -21,6 +21,7 @@ var txtBeautifier = {
         inputDir = inputDir || '../input/'
         outputDir = outputDir || '../output'
         let realPath
+        let failedFiles = []
 
         if (path.isAbsolute(inputDir)) {
             realPath = path.join(inputDir, '/')
@@ -37,6 +38,12 @@ var txtBeautifier = {
                     fsp.readFile(realPath + file).then((data) => {
 
                         let charset = jschardet.detect(data)
+                            // 解码失败
+                        if (!charset.encoding) {
+                            failedFiles.push(file)
+                            return
+                        }
+
                         charset.encoding = charset.encoding.toLowerCase().replace(/\-/g, '')
 
                         let result = txtBeautifier.beautify(data, charset.encoding)
@@ -97,7 +104,7 @@ var txtBeautifier = {
                 return '\n'
             }
 
-            // 其他情况 换行替换为空
+            // 其他情况把换行符替换为空
             return ''
         }
 
@@ -125,18 +132,15 @@ var txtBeautifier = {
             })
         }
 
-        fsp.exists(realPath).then((exists) => {
-            if (exists) {
-                writeFile()
-            } else {
-                fsp.mkdir(realPath).then(() => {
-                    writeFile()
-                })
-            }
-        })
+        fsp.exists(realPath)
+            .then((exists) => exists || fsp.mkdir(realPath))
+            .then(writeFile)
+            .catch(function(e) {
+                console.log(e)
+            })
 
     }
 }
 
-// run 
+// run
 txtBeautifier.init()
