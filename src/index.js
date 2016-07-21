@@ -104,8 +104,10 @@ var txtBeautifier = {
                 return '\n'
             }
 
-            // 其他情况把换行符替换为空
-            return ''
+            // 其他情况，把换行符替换为 一个空格
+            // 本来想替换为空，但是想想还是替换为空格吧
+            // 避免有时候文章出现一些诗歌，语句全部连在一起了
+            return ' '
         }
 
         result = string.replace(/\r\n/g, replaceFn)
