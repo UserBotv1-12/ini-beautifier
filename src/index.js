@@ -84,7 +84,8 @@ var txtBeautifier = {
             }
 
             // 前面是句号，允许换行
-            if (before === '。') {
+            // 其他，问号、感叹号、双引号、省略号
+            if (before === '。' || before === '？' || before === '！' || before === '”' || before === '…') {
                 return '\n'
             }
 
