@@ -1,5 +1,55 @@
-this a 
-test file.
+;
+; to be reliable, don't include space between
+; variable and value.
+;	Bad: [var]= value
+;	Bad: [var] = value
+;	Good: [var]=value
+;
+[RegionINI]
+Version=1
 
-这是一个
-测试文件。
+[options]
+;#######################################
+; options
+;#######################################
+;
+; this will disable/enable options
+;
+Reports=YES
+Photo_Show=NO
+Use_Windows_Domain_Login=YES
+Asset_Tracker=NO
+Storm_Tracker=YES
+
+;
+;#######################################
+; master switch for mapping options
+;#######################################
+;
+Embedded_Maps_Enable=YES
+
+
+[mail]
+;#######################################
+; mail settings options
+;  - added in 2008 version
+;#######################################
+;
+; mail settings options
+;
+; from email address
+From_Email_Address=m36111@example.com
+;
+; smtp server to use
+SMTP_erver=smtp.example.com
+;
+; BCC Admin is not yet implemented.  This will
+; blind copy the site admin on all email
+BCC_admin=false
+;
+; Default Domain
+;
+; primary domain used by the company
+;
+default_Domain=@example.com
+
