@@ -30,20 +30,20 @@ Semicolons (;) at the beginning of the line indicate a comment. Comment lines ar
 ```
 
 # options
-Blank lines
-Some rudimentary programs do not allow blank lines. Every line must therefore be a section head, a property, or a comment. You can control this with 'noblanks: true'. The default value is 'false'.
+### Blank lines
+Some rudimentary programs do not allow blank lines. Every line must therefore be a section head, a property, or a comment. You can control this with `noblanks: true`. The default value is 'false'.
 
 ### Comments
-In some implementations, a comment may begin anywhere on a line, including on the same line after properties or section declarations. In others, including the WinAPI function GetPrivateProfileString, comments must occur on lines by themselves. You may control this with 'comments on new lines = false' - default is 'true'
+In some implementations, a comment may begin anywhere on a line, including on the same line after properties or section declarations. In others, including the WinAPI function GetPrivateProfileString, comments must occur on lines by themselves. You may control this with `inlinecomments = true` - default is 'false' and will move them to a new line if present.
 
 ### Name/value delimiter
-Some implementations allow a colon (:) as the name/value delimiter instead of the equals sign. Equals sign is the default. Control with "delimiter: ':'"
+Some implementations allow a colon `:` as the name/value delimiter instead of `=`. Equals sign is the default. Control with `delimiter: ':'`
 
 ### Quoted values
-Some implementations allow values to be quoted, typically using double quotes and/or apostrophes. This allows for explicit declaration of whitespace, and/or for quoting of special characters (equals, semicolon, etc.). The standard Windows function GetPrivateProfileString supports this, and will remove quotation marks that surround the values. Control with "quotedvalues: 'on'" - default is 'off'.
+Some implementations allow values to be quoted, typically using double quotes and/or apostrophes. This allows for explicit declaration of whitespace, and/or for quoting of special characters (equals, semicolon, etc.). The standard Windows function GetPrivateProfileString supports this, and will remove quotation marks that surround the values. Control with `quotedvalues: 'on'` - default is 'off' and will remove them if present.
 
 ### Whitespace
-Interpretation of whitespace varies. Most implementations ignore leading and trailing whitespace around the outside of the property name. Some even ignore whitespace within values (for example, making "host name" and "hostname" equivalent). Some implementations also ignore leading and trailing whitespace around the property value; others consider all characters following the equals sign (including whitespace) to be part of the value. Control with "removewhitespace: false" - default is 'true'.
+Interpretation of whitespace varies. Most implementations ignore leading and trailing whitespace around the outside of the property name. Some even ignore whitespace within values (for example, making "host name" and "hostname" equivalent). Some implementations also ignore leading and trailing whitespace around the property value; others consider all characters following the equals sign (including whitespace) to be part of the value. Control with `removewhitespace: false` - default is 'true' and will remove any if present.
 
 
 ### Example
