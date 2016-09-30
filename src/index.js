@@ -38,7 +38,7 @@ var txtBeautifier = {
                     fsp.readFile(realPath + file).then((data) => {
 
                         let charset = jschardet.detect(data)
-                            // 解码失败
+                            // Decode failed
                         if (!charset.encoding) {
                             failedFiles.push(file)
                             return
@@ -73,12 +73,12 @@ var txtBeautifier = {
         let replaceFn = function(match, offset, string) {
             let before = string[offset - 1]
 
-            // In front of "catalog" allow wrap
+            // In front of "Catalog" (Directory) allow wrap
             if (string[offset - 2] + before === '目录') {
                 return '\n'
             }
 
-            // In front of "order" allow wrap
+            // In front of "order" (Sequence) allow wrap
             if (before === '序') {
                 return '\n'
             }
@@ -101,7 +101,7 @@ var txtBeautifier = {
 
             // In subsequent 10-character, there may be a "chapter x", "x", then breaks are allowed
             let after = string.substring(offset + 1, offset + 11)
-            if (after.indexOf('第') > -1 && (after.indexOf('章') > -1 || after.indexOf('节') > -1)) {
+            if (after.indexOf('第') > -1 && (after.indexOf('章') > -1 || after.indexOf('节') > -1)) { /* Subsection, Chapter || Section */
                 return '\n'
             }
 
