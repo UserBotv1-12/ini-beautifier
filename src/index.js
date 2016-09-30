@@ -3,13 +3,13 @@ var path = require('path')
 var jschardet = require('jschardet')
 var iconv = require('iconv-lite')
 
-// 设置最终输出的文件的编码
+// Set the final output file encoding
 var encodingForResult = 'utf8'
 
-// 设置要处理的文件夹的路径
+// Sets the path of the folder to process
 var inputDir = '../input/'
 
-// 设置输出文件夹的路径
+// Set the path to the output folder
 var outputDir = '../output'
 
 
@@ -73,41 +73,41 @@ var txtBeautifier = {
         let replaceFn = function(match, offset, string) {
             let before = string[offset - 1]
 
-            // 前面是“目录” 允许换行
+            // In front of "catalog" allow wrap
             if (string[offset - 2] + before === '目录') {
                 return '\n'
             }
 
-            // 前面是“序” 允许换行
+            // In front of "order" allow wrap
             if (before === '序') {
                 return '\n'
             }
 
-            // 前面是句号，允许换行
-            // 其他，问号、感叹号、双引号、省略号
+            // Front end breaks are allowed
+            // Other, question marks, exclamation marks, double quotation marks, ellipses
             if (before === '。' || before === '？' || before === '！' || before === '”' || before === '…') {
                 return '\n'
             }
 
-            // 前面是致谢，允许换行
+            // Thanks in the front, allowing wrap
             if (string[offset - 2] + before === '致谢') {
                 return '\n'
             }
 
-            // 前面是英文 .?! ，允许换行
+            // Front is in English.?! And breaks are allowed
             if (before === '.' || before === '?' || before === '!') {
                 return '\n'
             }
 
-            // 后续的10个字符中，可能出现了“第x章”、“第x节”，那么允许换行
+            // In subsequent 10-character, there may be a "chapter x", "x", then breaks are allowed
             let after = string.substring(offset + 1, offset + 11)
             if (after.indexOf('第') > -1 && (after.indexOf('章') > -1 || after.indexOf('节') > -1)) {
                 return '\n'
             }
 
-            // 其他情况，把换行符替换为 一个空格
-            // 本来想替换为空，但是想想还是替换为空格吧
-            // 避免有时候文章出现一些诗歌，语句全部连在一起了
+            // In other circumstances, space replaces newline with a
+            // Originally intended to replace the empty, but think is replaced with spaces
+            // Avoid poetry in the times article, the statement all together
             return ' '
         }
 
