@@ -45,6 +45,8 @@ Some implementations allow values to be quoted, typically using double quotes an
 ### Whitespace
 Interpretation of whitespace varies. Most implementations ignore leading and trailing whitespace around the outside of the property name. Some even ignore whitespace within values (for example, making "host name" and "hostname" equivalent). Some implementations also ignore leading and trailing whitespace around the property value; others consider all characters following the equals sign (including whitespace) to be part of the value. Control with `removewhitespace: false` - default is 'true' and will remove any if present.
 
+### Key Casing
+Key (or properties) can be cased to your specifications.  The valid options are `title`, `caps`, `lower`, `nochange`.  `nochange` is the default: `keycasing: 'nochange'`. `title` casing will locate `_` underscores and change the case of the next character.
 
 ### Example
 Following is an example INI file for an imaginary program. It has two sections: one for the owner of the software, and one for a payroll database connection. Comments note who modified the file last and why an IP address is used instead of a DNS name.
