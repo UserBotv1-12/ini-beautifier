@@ -1,6 +1,6 @@
 # txt-beautifier
 a text file beautifier.  
-一个文本文件美化工具。  
+Landscaping tool in a text file.   
 
 
 ## How to Use
@@ -10,23 +10,19 @@ npm install
 put your .txt files into input directory, then double click the start.bat,  
 wait a moment, the result file will be find in output directory.  
 
-Chinese:  
-把你的.txt文件放进 input 文件夹，之后双击start.bat文件，  
-稍等会儿，之后处理完的文件会在 output 文件夹。  
+ -- From Chinese --
+Txt file you put in the input folder and then double-clicking the start.bat file, slightly later, after files have been processed in the output folder.  
 
 
-程序做了什么？  
-其实很简单，保留合理的换行符，删除多余的换行符。  
+What program do? It's really quite simple, retain reasonable line breaks, remove the extra line breaks. 
 
-如何确定一个换行是多余的（或者说不合理的）？  
-如果换行符号前面，不是句号“。”等等符号结尾，基本可以判断这个换行是多余的，  
-当然，我的程序还处理了更细节的一些东西，不止这么简单。  
+How to determine if a line is redundant (or unreasonable)? If newline symbol in front, not a period. " "The symbolic end, Basic you can tell the line is redundant, of course, I also dealt with something more detailed, more simple.  
 
-经过美化处理的文本，你的阅读器打开，就会有更好的排版。  
+After beautification of text, open your reader, you will have better typography.  
 
-如果有 bug ，请告知我，谢谢。  
+If there is a bug, please let me know, thank you.  
 
-感谢业界开源程序。  
+Thanks to open source programs in the industry.
 
 
 
