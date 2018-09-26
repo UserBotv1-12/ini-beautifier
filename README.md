@@ -1,4 +1,5 @@
 # ini-beautifier
+## this is not yet working ##
 An INI file beautifier.  
 
 # what is an INI file?
