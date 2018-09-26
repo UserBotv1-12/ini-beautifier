@@ -69,53 +69,22 @@ var txtBeautifier = {
         return result
     },
     replace(string) {
-        let result
-        let replaceFn = function(match, offset, string) {
-            let before = string[offset - 1]
+        let result = string;
 
-            // In front of "Catalog" (Directory) allow wrap
-            if (string[offset - 2] + before === '目录') {
-                return '\n'
-            }
+        // remove any whitespace from around '='
+        result = result.replace(/(\s*=\s*)/g, '=');
+        
+        // uppercase key
+        result = result.replace( /(\S+)=(\S+)/g, function($1,$2) {return $1.replace($1, $1.toUpperCase());}) 
+                
+        // remove blank lines
+        result = result.replace( /^\s*(?:\r\n?|\n)/gm, "") 
 
-            // In front of "order" (Sequence) allow wrap
-            if (before === '序') {
-                return '\n'
-            }
-
-            // Front end breaks are allowed
-            // Other, question marks, exclamation marks, double quotation marks, ellipses
-            if (before === '。' || before === '？' || before === '！' || before === '”' || before === '…') {
-                return '\n'
-            }
-
-            // Thanks in the front, allowing wrap
-            if (string[offset - 2] + before === '致谢') {
-                return '\n'
-            }
-
-            // Front is in English.?! And breaks are allowed
-            if (before === '.' || before === '?' || before === '!') {
-                return '\n'
-            }
-
-            // In subsequent 10-character, there may be a "chapter x", "x", then breaks are allowed
-            let after = string.substring(offset + 1, offset + 11)
-            if (after.indexOf('第') > -1 && (after.indexOf('章') > -1 || after.indexOf('节') > -1)) { /* Subsection, Chapter || Section */
-                return '\n'
-            }
-
-            // In other circumstances, space replaces newline with a
-            // Originally intended to replace the empty, but think is replaced with spaces
-            // Avoid poetry in the times article, the statement all together
-            return ' '
-        }
-
-        result = string.replace(/\r\n/g, replaceFn)
-
-        result = result.replace(/\n/g, replaceFn)
-
+        // lowecase the section
+        result = result.replace( /^\[(\S+)\]/g, function(v) {return "\n" + v.toLowerCase(); }) 
+        
         return result
+
     },
     writeFile(filename, content) {
         let realPath
