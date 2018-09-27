@@ -29,17 +29,17 @@ Semicolons (;) at the beginning of the line indicate a comment. Comment lines ar
 ; 
 ```
 # options today
-Today, the beautifier is very opinionated.  You cannot set options to alter behavior.  Currently, it
-* removes whitespace around the `=`
-* uppercases the key (`key=value`)
+Today, the beautifier is very opinionated.  You *cannot* set options to alter behavior.  Currently, it
+* uppercases the key (`KEY=value`)
 * lowercases the section name (`[section]`)
+* removes whitespace around the `=`
 * removes all blank lines
 
 # future options
 Notice - these are features I want to implement but are not yet ready.
 
 ### Blank lines
-TODO: Some rudimentary programs do not allow blank lines. Every line must therefore be a section head, a property, or a comment. You can control this with `noblanks: true`. The default value is 'false'.
+TODO: Some rudimentary programs do not allow blank lines. Every line must therefore be a section head, a property, or a comment. You can control this with `noblanks: true`. The default value is 'true'.
 
 ### Comments
 TODO: In some implementations, a comment may begin anywhere on a line, including on the same line after properties or section declarations. In others, including the WinAPI function GetPrivateProfileString, comments must occur on lines by themselves. You may control this with `inlinecomments = true` - default is 'false' and will move them to a new line if present.
@@ -75,9 +75,4 @@ file="payroll.dat"
 ```
 npm install
 ```
-put your .txt files into input directory, then `node src/index.js`, wait a moment, the result file will be found in `/output` directory.  
-
- -- From Chinese --
-What program do? Creates uniform INI files
-
-If there is a bug, please let me know, thank you.  
+put your .txt or .ini files into `/input` directory, then `node src/index.js`, wait a moment, the corresponding beautified file will be found in `/output` directory.  
