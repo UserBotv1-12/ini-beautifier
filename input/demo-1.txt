@@ -15,9 +15,9 @@ Version=1
 ;
 ; this will disable/enable options
 ;
-Reports=YES
-Photo_Show=NO
-Use_Windows_Domain_Login=YES
+Reports =YES
+Photo_Show= NO
+Use_Windows_Domain_Login = YES
 Asset_Tracker=NO
 Storm_Tracker=YES
 
@@ -26,10 +26,10 @@ Storm_Tracker=YES
 ; master switch for mapping options
 ;#######################################
 ;
-Embedded_Maps_Enable=YES
+Embedded_Maps_Enable=no
 
 
-[mail]
+[Mail]
 ;#######################################
 ; mail settings options
 ;  - added in 2008 version
