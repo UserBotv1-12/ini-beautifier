@@ -1,6 +1,5 @@
 # ini-beautifier
-## this is not yet working ##
-An INI file beautifier.  
+An INI file beautifier. 
 
 # what is an INI file?
 INI files are simple text files with a basic structure composed of sections, key (or property), and values. https://en.wikipedia.org/wiki/INI_file
@@ -26,28 +25,36 @@ Section and property names are not case sensitive in the Windows implementation.
 Semicolons (;) at the beginning of the line indicate a comment. Comment lines are ignored.
 ```
 ;
-; comment text
+; comment text has no bearing on keys or values
 ; 
 ```
+# options today
+Today, the beautifier is very opinionated.  You cannot set options to alter behavior.  Currently, it
+* removes whitespace around the `=`
+* uppercases the key (`key=value`)
+* lowercases the section name (`[section]`)
+* removes all blank lines
 
-# options
+# future options
+Notice - these are features I want to implement but are not yet ready.
+
 ### Blank lines
-Some rudimentary programs do not allow blank lines. Every line must therefore be a section head, a property, or a comment. You can control this with `noblanks: true`. The default value is 'false'.
+TODO: Some rudimentary programs do not allow blank lines. Every line must therefore be a section head, a property, or a comment. You can control this with `noblanks: true`. The default value is 'false'.
 
 ### Comments
-In some implementations, a comment may begin anywhere on a line, including on the same line after properties or section declarations. In others, including the WinAPI function GetPrivateProfileString, comments must occur on lines by themselves. You may control this with `inlinecomments = true` - default is 'false' and will move them to a new line if present.
+TODO: In some implementations, a comment may begin anywhere on a line, including on the same line after properties or section declarations. In others, including the WinAPI function GetPrivateProfileString, comments must occur on lines by themselves. You may control this with `inlinecomments = true` - default is 'false' and will move them to a new line if present.
 
 ### Name/value delimiter
-Some implementations allow a colon `:` as the name/value delimiter instead of `=`. Equals sign is the default. Control with `delimiter: ':'`
+TODO: Some implementations allow a colon `:` as the name/value delimiter instead of `=`. Equals sign is the default. Control with `delimiter: ':'`
 
 ### Quoted values
-Some implementations allow values to be quoted, typically using double quotes and/or apostrophes. This allows for explicit declaration of whitespace, and/or for quoting of special characters (equals, semicolon, etc.). The standard Windows function GetPrivateProfileString supports this, and will remove quotation marks that surround the values. Control with `quotedvalues: 'on'` - default is 'off' and will remove them if present.
+TODO: Some implementations allow values to be quoted, typically using double quotes and/or apostrophes. This allows for explicit declaration of whitespace, and/or for quoting of special characters (equals, semicolon, etc.). The standard Windows function GetPrivateProfileString supports this, and will remove quotation marks that surround the values. Control with `quotedvalues: 'on'` - default is 'off' and will remove them if present.
 
 ### Whitespace
-Interpretation of whitespace varies. Most implementations ignore leading and trailing whitespace around the outside of the property name. Some even ignore whitespace within values (for example, making "host name" and "hostname" equivalent). Some implementations also ignore leading and trailing whitespace around the property value; others consider all characters following the equals sign (including whitespace) to be part of the value. Control with `removewhitespace: false` - default is 'true' and will remove any if present.
+TODO: Interpretation of whitespace varies. Most implementations ignore leading and trailing whitespace around the outside of the property name. Some even ignore whitespace within values (for example, making "host name" and "hostname" equivalent). Some implementations also ignore leading and trailing whitespace around the property value; others consider all characters following the equals sign (including whitespace) to be part of the value. Control with `removewhitespace: false` - default is 'true' and will remove any if present.
 
 ### Key Casing
-Key (or properties) can be cased to your specifications.  The valid options are `title`, `caps`, `lower`, `nochange`.  `nochange` is the default: `keycasing: 'nochange'`. `title` casing will locate `_` underscores and change the case of the next character.
+TODO: Key (or properties) can be cased to your specifications.  The valid options are `title`, `caps`, `lower`, `nochange`.  `caps` is the default: `keycasing: 'nochange'`. `title` casing will locate `_` underscores and change the case of the next character.
 
 ### Example
 Following is an example INI file for an imaginary program. It has two sections: one for the owner of the software, and one for a payroll database connection. Comments note who modified the file last and why an IP address is used instead of a DNS name.
@@ -68,19 +75,9 @@ file="payroll.dat"
 ```
 npm install
 ```
-put your .txt files into input directory, then double click the start.bat,  
-wait a moment, the result file will be find in output directory.  
+put your .txt files into input directory, then `node src/index.js`, wait a moment, the result file will be found in `/output` directory.  
 
  -- From Chinese --
-Txt file you put in the input folder and then double-clicking the start.bat file, slightly later, after files have been processed in the output folder.  
-
-
-What program do? It's really quite simple, retain reasonable line breaks, remove the extra line breaks. 
-
-How to determine if a line is redundant (or unreasonable)? If newline symbol in front, not a period. " "The symbolic end, Basic you can tell the line is redundant, of course, I also dealt with something more detailed, more simple.  
-
-After beautification of text, open your reader, you will have better typography.  
+What program do? Creates uniform INI files
 
 If there is a bug, please let me know, thank you.  
-
-Thanks to open source programs in the industry.
